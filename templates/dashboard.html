@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Rent Tracker Dashboard</title>
+<style>
+table { width: 70%; border-collapse: collapse; margin: 20px auto; }
+th, td { border: 1px solid #999; padding: 8px 12px; text-align: left; }
+th { background-color: #f4f4f4; }
+.paid { color: green; font-weight: bold; }
+.unpaid { color: red; font-weight: bold; }
+.center { text-align: center; }
+button { padding: 5px 10px; }
+</style>
+</head>
+<body>
+<h1 class="center">Tenant Payment Dashboard</h1>
+<div class="center" style="margin-bottom:20px;">
+<a href="{{ url_for('send_all_reminders') }}">
+<button>Send All Reminders</button>
+</a>
+</div>
+<table>
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Paid</th>
+</tr>
+{% for tenant in tenants %}
+<tr>
+<td>{{ tenant.name }}</td>
+<td>{{ tenant.email }}</td>
+<td class="{{ 'paid' if tenant.paid else 'unpaid' }}">
+{{ 'Yes' if tenant.paid else 'No' }}
+</td>
+</tr>
+{% endfor %}
+</table>
+</body>
+</html>
